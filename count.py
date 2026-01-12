@@ -1,13 +1,14 @@
 from collections import Counter
-#Import string module in order to exclude punctuations from sentences
+import string
 
 print("---Welcome to word counter :) ---\n")
 sentence = input("Type your sentence/word: \n").lower()
-words = sentence.split()
-# changes words in a sentence to list items
-
+clean_sentence = sentence.translate(str.maketrans("", "", string.punctuation))
 
 # Number of words
+words = clean_sentence.split()
+# changes words in a sentence to list items
+
 my_dictionary = dict(Counter(words))
 print("The words are: ")
 for key in my_dictionary:
@@ -17,15 +18,15 @@ print(f"\n The total number of words in the sentence is {len(words)}\n")
 
 
 # Number of letters
-length = len(sentence.replace(" ", ""))
+length = len(clean_sentence.replace(" ", ""))
 # This removes spaces
 # Note: example.replace("old", "new", "occurences to be replaced")
 
-letters = (dict(Counter(sentence)))
+letters = (dict(Counter(clean_sentence)))
 # dict() changes  current type to dictionary
 # Returns: {'t': 1, 'o': 1, 'y': 1}
 
-letters.pop(" ")
+letters.pop(" ", None)
 items = letters.items()
 # Returns: dict_items([('t', 1), ('o', 1), ('y', 1)])
 
@@ -36,7 +37,11 @@ for key, value in letters.items():
 max_freq = max(items, key=lambda x: x[1])
 print(f"The letter with the highest frequency is: {max_freq}")
 
-# Remaining: Improve the logic for max_freq to handle cases where we have shared highest frequency.
+max_count = max(letters.values())
+most_frequent_letters = [letter for letter, count in letters.items() if count == max_count]
+
+print(f"Most frequent letter(s): {most_frequent_letters} (appeared {max_count} times)")
+
 
 
 
