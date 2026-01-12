@@ -4,6 +4,7 @@ import string
 print("---Welcome to word counter :) ---\n")
 sentence = input("Type your sentence/word: \n").lower()
 clean_sentence = sentence.translate(str.maketrans("", "", string.punctuation))
+# Ignores punctuations and symbols when counting words
 
 # Number of words
 words = clean_sentence.split()
